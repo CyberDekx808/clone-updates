@@ -4,7 +4,7 @@ from flask_login import login_user, current_user, login_required, logout_user
 from . import public_bp as bp  #  Blueprint created in public/__init__.py;  its name is "public"
 
 
-@bp.route("/about us")
+@bp.route("/about-us")
 def about_us():
     return render_template("public/about-us.html")
 

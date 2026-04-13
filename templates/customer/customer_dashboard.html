@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Greenfield Local Hub — Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/customer/customer_dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="yellow-header">
+        <div class="left-side">
+            <h1>Greenfield Local Hub</h1>
+        </div>
+        <nav class="top-nav">
+            <a href="{{ url_for('customer.customer_dashboard') }}" class="active">Dashboard</a>
+            <a href="{{ url_for('customer.Farmers_Market') }}">Farmers Market</a>
+            <a href="{{ url_for('auth.profile') }}">Account</a>
+            <a href="{{ url_for('public.about_us') }}">About Us</a>
+            <a href="{{ url_for('auth.logout') }}">Logout</a>
+        </nav>
+    </div>
+
+    <div class="dashboard-body">
+        <!-- Welcome + CTA -->
+        <div class="dashboard-header">
+            <h2 class="welcome-msg">Welcome back, {{ current_user.full_name or 'Customer' }}</h2>
+            <a href="{{ url_for('customer.Farmers_Market') }}" class="btn btn-start-order">Start new order</a>
+        </div>
+
+        <!-- ── Upcoming Orders ── -->
+        <section class="orders-section">
+            <h3 class="section-title">Upcoming Orders</h3>
+
+            {% if upcoming %}
+            <div class="orders-row">
+                {% for order in upcoming %}
+                <div class="order-card">
+                    <span class="order-badge {{ order.order_type.value }}">
+                        {{ order.order_type.value | capitalize }}
+                    </span>
+                    <p class="order-items-count">{{ order.items | length }} item{{ 's' if order.items | length != 1 }}</p>
+                    <p class="order-date">
+                        {% if order.dc_date %}
+                            {{ order.dc_date.strftime('%d/%m/%Y') }}
+                        {% else %}
+                            Date pending
+                        {% endif %}
+                    </p>
+                    <p class="order-status status-{{ order.status.value | lower }}">{{ order.status.value }}</p>
+                    <form method="POST" action="{{ url_for('customer.cancel_order', order_id=order.order_id) }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn-cancel" onclick="return confirm('Cancel this order?')">Cancel</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <p>No upcoming orders yet.</p>
+                <a href="{{ url_for('customer.Farmers_Market') }}" class="btn btn-browse">Browse the Farmers Market</a>
+            </div>
+            {% endif %}
+        </section>
+
+        <!-- ── Previous Orders ── -->
+        <section class="orders-section">
+            <h3 class="section-title">Previous Orders</h3>
+
+            {% if previous %}
+            <div class="orders-row">
+                {% for order in previous %}
+                <div class="order-card past">
+                    <span class="order-badge {{ order.order_type.value }}">
+                        {{ order.order_type.value | capitalize }}
+                    </span>
+                    <p class="order-items-count">{{ order.items | length }} item{{ 's' if order.items | length != 1 }}</p>
+                    <p class="order-date">
+                        {% if order.dc_date %}
+                            {{ order.dc_date.strftime('%d/%m/%Y') }}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </p>
+                    <p class="order-status status-{{ order.status.value | lower }}">{{ order.status.value }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state">
+                <p>No previous orders to show.</p>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+</div>
+{% endblock %}

@@ -33,10 +33,7 @@ def normalize_name(name: str) -> str:
     return " ".join(part.capitalize() for part in (name or "").split())
 
 
-def validate_staff_code(self, field):
-        expected = current_app.config.get("ADMIN_CODE") or current_app.config.get("PRODUCER_CODE")
-        if field.data != expected:
-            raise ValidationError("Invalid staff code.")
+
 
 def validate_dob(form, field):
     dob = field.data
@@ -82,7 +79,7 @@ class RegisterForm(FlaskForm):
     staff_code = StringField(
         "Staff Code",
         render_kw={"placeholder": "Staff Code"},
-        validators=[optional()] + [validate_staff_code]
+        validators=[optional()]
     )
 
     submit = SubmitField("Begin My Journey")

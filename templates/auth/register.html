@@ -2,7 +2,7 @@
 {% block title %} Greenfield Local Hub — Register {% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='/auth/register.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth/register.css') }}">
 {% endblock %}
 
 {%block content%}
@@ -38,7 +38,7 @@
 
                 <div class="form-row">
                     {{ form.phone_number(id="phone_number", autocomplete="phone_number", inputmode="phone_number") }}
-                    {% for err in form.dob.errors %}<p class="error">{{ err }}</p> {% endfor %} 
+                    {% for err in form.phone_number.errors %}<p class="error">{{ err }}</p> {% endfor %} 
                 </div>
 
                 <div class="form-row">
@@ -49,12 +49,12 @@
                 
                 <div class="form-row">
                     {{ form.password(id="password", autocomplete="password") }}
-                    {% for err in form.dob.errors %}<p class="error">{{ err }}</p> {% endfor %} 
+                    {% for err in form.password.errors %}<p class="error">{{ err }}</p> {% endfor %} 
                 </div>
                 
                 <div class="form-row">
                     {{ form.confirm(id="confirm_password", autocomplete="new-password") }}
-                    {% for err in form.dob.errors %}<p class="error">{{ err }}</p> {% endfor %} 
+                    {% for err in form.confirm.errors %}<p class="error">{{ err }}</p> {% endfor %} 
                 </div>
 
                 <div class="form-row">
@@ -67,7 +67,7 @@
                     <a class="link" href="{{ url_for('auth.login') }}">Have an account already?</a>
                 </div>
                 
-                <script src="{{ url_for('s tatic', filename='js/auth/register.js') }}" defer></script>
+                <script src="{{ url_for('static', filename='js/auth/register.js') }}" defer></script>
             </form>
 
     
