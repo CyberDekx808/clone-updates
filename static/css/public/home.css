@@ -141,15 +141,7 @@ cursor: pointer;
 
 
 .silent-footer {
-position: absolute;
-bottom: 8px;
-left: 0;
-width: 100%;
-text-align: center;
 color: #fff;
-font-size: 15px;
-opacity: 0.85;
-pointer-events: none;
 }
 
 
