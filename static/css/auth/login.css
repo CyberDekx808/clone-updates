@@ -41,12 +41,12 @@ body {
 
 
 .top-nav a:hover {
-    color: #94714b;
+    color: #30673F;
 }
 
 .top-nav a.active,
 .top-nav a[aria-current="page"] {
-    color: #94714b;
+    color: #30673F;
 }
 
 input{

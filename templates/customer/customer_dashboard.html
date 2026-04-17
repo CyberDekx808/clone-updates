@@ -35,6 +35,21 @@
             <div class="orders-row">
                 {% for order in upcoming %}
                 <div class="order-card">
+
+                    {% if order.order_type.value == "delivery" %}
+                        <img
+                            src="{{ url_for('static', filename='images/martin-baron-gfunQ5nvh6Y-unsplash.jpg') }}"
+                            alt="Delivery van carrying produce"
+                            class="order-card-img"
+                        >
+                    {% elif order.order_type.value == "collection" %}
+                        <img
+                            src="{{ url_for('static', filename='images/sara-scarpa-AJFQGDaFP-s-unsplash.jpg') }}"
+                            alt="Basket of fresh produce for collection"
+                            class="order-card-img"
+                        >
+                    {% endif %}
+
                     <span class="order-badge {{ order.order_type.value }}">
                         {{ order.order_type.value | capitalize }}
                     </span>
@@ -70,6 +85,21 @@
             <div class="orders-row">
                 {% for order in previous %}
                 <div class="order-card past">
+
+                    {% if order.order_type.value == "delivery" %}
+                        <img
+                            src="{{ url_for('static', filename='images/martin-baron-gfunQ5nvh6Y-unsplash.jpg') }}"
+                            alt="Delivery van carrying produce"
+                            class="order-card-img"
+                        >
+                    {% elif order.order_type.value == "collection" %}
+                        <img
+                            src="{{ url_for('static', filename='images/sara-scarpa-AJFQGDaFP-s-unsplash.jpg') }}"
+                            alt="Basket of fresh produce for collection"
+                            class="order-card-img"
+                        >
+                    {% endif %}
+
                     <span class="order-badge {{ order.order_type.value }}">
                         {{ order.order_type.value | capitalize }}
                     </span>

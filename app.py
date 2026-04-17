@@ -47,7 +47,7 @@ from customer import customer_bp
 
 app.register_blueprint(auth_bp, url_prefix="/auth")
 app.register_blueprint(admin_bp, url_prefix="/admin")
-app.register_blueprint(public_bp, url_prefix="/public")
+app.register_blueprint(public_bp)  # no prefix for public routes
 app.register_blueprint(customer_bp, url_prefix="/customer")
 
 # debug: dump all routes at startup
@@ -64,9 +64,6 @@ print("Using database file:", os.path.abspath(
     app.config['SQLALCHEMY_DATABASE_URI'].replace("sqlite:///", "")
 ))
 
-@app.route("/")
-def home():
-    return render_template("public/home.html")
 
 
 # --- Error handlers ---
@@ -82,7 +79,7 @@ def handle_csrf_error(e):
 # Too many requests (rate limiting)
 @app.errorhandler(429)
 def ratelimit_handler(e):
-    return render_template("public/429.html", error=e), 429
+    return render_template("public/error-429.html", error=e), 429
 
 # Handle all HTTP errors (404, 405, etc.) with a generic page
 @app.errorhandler(HTTPException)

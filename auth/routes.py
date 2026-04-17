@@ -91,7 +91,11 @@ def register():
 @limiter.limit("10 per minute")  # rate limit to prevent abuse
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("customer.customer_dashboard"))
+        if current_user.role == Role.Customer:
+            return redirect(url_for("customer.customer_dashboard"))
+    elif current_user.is_authenticated:
+            if current_user.role in [Role.Producer, Role.Admin]:
+                return redirect(url_for("admin.admin_dashboard"))
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -108,8 +112,10 @@ def login():
         # Prefer timezone-aware now
         user.last_login = datetime.now(timezone.utc)
         db.session.commit()
-        
-        return redirect(url_for("customer.customer_dashboard"))
+        if user.role == Role.Customer:
+            return redirect(url_for("customer.customer_dashboard"))
+        elif user.role in [Role.Producer, Role.Admin]:
+            return redirect(url_for("admin.admin_dashboard"))
 
     return render_template("auth/login.html", form=form)
 
@@ -205,6 +211,6 @@ def logout():
     logout_user()
     session.clear()
     flash("Logged out.", "success")
-    resp = make_response(redirect(url_for("home")))
+    resp = make_response(redirect(url_for("public.home")))
     resp.delete_cookie("remember_token")
     return resp
