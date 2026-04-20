@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}About Us{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/public/about-us.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="about-hero">
+    <div class="about-overlay"></div>
+
+    <div class="about-page">
+        <nav class="about-nav">
+            <a href="{{ url_for('public.home') }}">Home</a>
+            <a href="{{ url_for('auth.register') }}">register</a>
+            <a href="{{ url_for('auth.login') }}">Login</a>
+        </nav>
+
+        <main class="about-content">
+            <h1 class="about-title">About Us</h1>
+
+            <section class="about-grid">
+                <div class="about-card card-left">
+                    <p>
+                        Here at GLH we work hard to make sure that all of our customers get
+                        nature’s best, to bring us one step forward to being the best version
+                        of ourselves. We pride ourselves on our customer service and response
+                        to ensure health &amp; wealth that lasts a lifetime
+                    </p>
+                </div>
+
+                <div class="about-card card-right">
+                    <p>
+                        Since formally leaving the European Union (EU) in 2020, British
+                        farmers have been faced with a myriad of challenges. GLH is a space
+                        where they can make back the money they lose because of underpayment
+                        &amp; no legal protection. Help support them &amp; other local level
+                        farmers so they can give us nature’s best.
+                    </p>
+                </div>
+
+                <a href="{{ url_for('public.privacy') }}" class="about-btn btn-left">
+                    Privacy Policy
+                </a>
+
+                <a href="{{ url_for('customer.Farmers_Market') }}" class="about-btn btn-bottom">
+                    Our Products
+                </a>
+            </section>
+        </main>
+    </div>
+</div>
+{% endblock %}

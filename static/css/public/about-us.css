@@ -1,0 +1,262 @@
+/* ── about_us.css ── */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #1f1f1f;
+}
+
+.about-hero {
+    min-height: 100vh;
+    width: 100%;
+    background-image: url("/static/images/about-us-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.about-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.18);
+    z-index: 0;
+}
+
+.about-page {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1280px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 34px 18px;
+    box-sizing: border-box;
+}
+
+/* ── top nav ── */
+.about-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.about-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+
+.about-nav a:hover {
+    color: #5ca56c;
+}
+
+/* ── main content ── */
+.about-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-title {
+    margin: 18px 0 34px 28px;
+    font-size: 72px;
+    line-height: 1;
+    color: #1f6a3d;
+    font-weight: 800;
+}
+
+/* ── layout area ── */
+.about-grid {
+    position: relative;
+    flex: 1;
+    min-height: 700px;
+}
+
+/* ── text cards ── */
+.about-card {
+    position: absolute;
+    background: rgba(130, 122, 86, 0.92);
+    color: #ffffff;
+    border-radius: 12px;
+    padding: 22px 24px;
+    box-sizing: border-box;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.about-card p {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.28;
+    font-weight: 700;
+}
+
+.card-left {
+    top: 120px;
+    left: 36px;
+    width: 560px;
+}
+
+.card-right {
+    right: 36px;
+    top: 440px;
+    width: 620px;
+}
+
+/* ── buttons ── */
+.about-btn {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    padding: 16px 28px;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.about-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+}
+
+.btn-left {
+    left: 120px;
+    top: 620px;
+    width: 260px;
+    background: #5ca56c;
+}
+
+.btn-bottom {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 42px;
+    width: 280px;
+    background: rgba(130, 122, 86, 0.95);
+}
+
+.btn-bottom:hover {
+    transform: translateX(-50%) translateY(-2px);
+}
+
+/* ── footer ── */
+.about-footer {
+    display: flex;
+    justify-content: center;
+    padding-top: 16px;
+}
+
+.about-footer p {
+    margin: 0;
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 800;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* ── responsive ── */
+@media (max-width: 1100px) {
+    .about-title {
+        font-size: 58px;
+        margin-left: 12px;
+    }
+
+    .about-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        min-height: auto;
+    }
+
+    .about-card,
+    .about-btn {
+        position: static;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .card-left,
+    .card-right {
+        width: 100%;
+    }
+
+    .about-card p {
+        font-size: 20px;
+    }
+
+    .btn-left,
+    .btn-bottom {
+        transform: none;
+    }
+
+    .btn-bottom:hover {
+        transform: translateY(-2px);
+    }
+
+    .about-footer {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-page {
+        padding: 20px 16px 16px;
+    }
+
+    .about-nav {
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .about-nav a {
+        font-size: 15px;
+    }
+
+    .about-title {
+        font-size: 44px;
+        margin: 12px 0 24px 0;
+    }
+
+    .about-card {
+        padding: 18px;
+    }
+
+    .about-card p {
+        font-size: 18px;
+        line-height: 1.35;
+    }
+
+    .about-btn {
+        font-size: 17px;
+        padding: 14px 20px;
+    }
+
+    .about-footer p {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-title {
+        font-size: 36px;
+    }
+
+    .about-card p {
+        font-size: 16px;
+    }
+
+    .about-btn {
+        font-size: 16px;
+    }
+}
