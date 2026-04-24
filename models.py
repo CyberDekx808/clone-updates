@@ -63,7 +63,6 @@ class Product(db.Model):
     stock         = db.Column(db.Integer, nullable=False, default=0)
     producer      = db.Column(SAEnum(Producers), nullable=False)
     created_at    = db.Column(db.DateTime, default=UTC_NOW)
-    order_total       = db.Column(Numeric(10, 2), nullable=False)
     order_items = db.relationship("OrderItem", back_populates="product", cascade="all, delete-orphan")
 
 class Orders(db.Model):
@@ -73,6 +72,7 @@ class Orders(db.Model):
     order_type     = db.Column(SAEnum(OrderType), nullable=False)
     status         = db.Column(SAEnum(Status), default=Status.Pending, nullable=False)
     order_date     = db.Column(db.DateTime, default=UTC_NOW)
+    order_total       = db.Column(Numeric(10, 2), nullable=False)
     dc_date  = db.Column(db.DateTime) # dc_date = delivery/collection date
     delivery_addr  = db.Column(db.String(255))
 

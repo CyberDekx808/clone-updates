@@ -1,8 +1,8 @@
 // customer/customer_dashboard.js
 document.addEventListener("DOMContentLoaded", () => {
-const cancelBtn = document.getElementById("myBtn");
+  const cancelBtn = document.getElementById("myBtn");
 
-cancelBtn.addEventListener("click", (event) => {
+  cancelBtn.addEventListener("click", (event) => {
     // Show confirmation dialog
     event.preventDefault();
     
@@ -10,11 +10,12 @@ cancelBtn.addEventListener("click", (event) => {
 
     if (userConfirmed) {
       // YES option
-    alert("Order has been canceled.");
+      alert("Order has been canceled.");
       // You can also call your cancel API or redirect here
     } else {
       // NO option
-    alert("Order was NOT canceled.");
+      alert("Order was NOT canceled.");
     }
+  });
 });
-});
+

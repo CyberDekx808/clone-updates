@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Greenfield Local Hub — Privacy Policy{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/public/privacy.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="green-header">
+        <div class="left-side">
+            <h1>Greenfield Local Hub</h1>
+        </div>
+        <nav class="top-nav">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('customer.customer_dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('customer.Farmers_Market') }}">Farmers Market</a>
+                <a href="{{ url_for('auth.profile') }}">Account</a>
+                <a href="{{ url_for('auth.logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('public.home') }}">Home</a>
+                <a href="{{ url_for('auth.register') }}">Register</a>
+                <a href="{{ url_for('auth.login') }}">Login</a>
+                <a href="{{ url_for('public.about_us') }}">About Us</a>
+            {% endif %}
+            <a href="{{ url_for('public.privacy') }}" class="active">Privacy</a>
+        </nav>
+    </div>
+
+    <div class="privacy-body">
+        <h2 class="page-title">Privacy Policy</h2>
+        <p class="last-updated">Last updated: March 2026</p>
+
+        <div class="policy-card">
+            <section class="policy-section">
+                <h3>1. Who We Are</h3>
+                <p>Greenfield Local Hub (GLH) is a cooperative of local farmers and food producers. This privacy policy explains how we collect, use and protect your personal information when you use our platform.</p>
+            </section>
+
+            <section class="policy-section">
+                <h3>2. What Data We Collect</h3>
+                <p>When you create an account we collect the following information:</p>
+                <ul>
+                    <li>Full name</li>
+                    <li>Email address</li>
+                    <li>Phone number</li>
+                    <li>Date of birth (to verify you are at least 13 years old)</li>
+                    <li>Delivery address (only when you choose delivery at checkout)</li>
+                </ul>
+                <p>We do not collect or store payment card details. All payments are simulated in the current version of the platform. In future iterations, payment processing will be handled by Stripe, a PCI-DSS Level 1 certified provider, meaning card data never touches our servers.</p>
+            </section>
+
+            <section class="policy-section">
+                <h3>3. How We Use Your Data</h3>
+                <ul>
+                    <li>Account creation and authentication</li>
+                    <li>Processing and tracking your orders</li>
+                    <li>Communicating delivery or collection details</li>
+                    <li>Improving our services based on usage patterns</li>
+                </ul>
+                <p>We will never sell, rent or share your personal data with third parties for marketing purposes.</p>
+            </section>
+
+            <section class="policy-section">
+                <h3>4. How We Protect Your Data</h3>
+                <ul>
+                    <li>Passwords are salted and hashed using Werkzeug security — they are never stored in plain text</li>
+                    <li>All sessions use HttpOnly and SameSite cookies to prevent cross-site attacks</li>
+                    <li>CSRF protection is applied to every form submission</li>
+                    <li>Content Security Policy headers restrict what resources the browser can load</li>
+                    <li>Rate limiting is in place to prevent brute-force login attempts</li>
+                </ul>
+            </section>
+
+            <section class="policy-section">
+                <h3>5. Your Rights Under UK GDPR</h3>
+                <p>Under the UK General Data Protection Regulation and the Data Protection Act 2018, you have the right to:</p>
+                <ul>
+                    <li>Access the personal data we hold about you</li>
+                    <li>Correct any inaccurate personal data</li>
+                    <li>Request deletion of your account and all associated data</li>
+                    <li>Withdraw consent at any time</li>
+                </ul>
+                <p>You can update your name, email and phone number from your <strong>Account</strong> page. You can permanently delete your account and all associated data from the same page.</p>
+            </section>
+
+            <section class="policy-section">
+                <h3>6. Cookies</h3>
+                <p>We use essential cookies only:</p>
+                <ul>
+                    <li>Session cookie — keeps you logged in during your visit</li>
+                    <li>Remember me cookie — keeps you logged in between visits (optional, expires after 30 days)</li>
+                    <li>CSRF token cookie — protects against cross-site request forgery</li>
+                </ul>
+                <p>We do not use analytics, advertising or tracking cookies.</p>
+            </section>
+
+            <section class="policy-section">
+                <h3>7. Data Retention</h3>
+                <p>Your account data is stored for as long as your account is active. Order history is retained for your reference. If you delete your account, all personal data and order history is permanently removed from our database.</p>
+            </section>
+
+            <section class="policy-section">
+                <h3>8. Contact</h3>
+                <p>If you have questions about this privacy policy or wish to exercise your data rights, please contact the GLH administration team.</p>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
