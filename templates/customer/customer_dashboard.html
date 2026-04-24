@@ -27,7 +27,7 @@
             <a href="{{ url_for('customer.Farmers_Market') }}" class="btn btn-start-order">Start new order</a>
         </div>
 
-        <!-- ── Upcoming Orders ── -->
+                <!-- ── Upcoming Orders ── -->
         <section class="orders-section">
             <h3 class="section-title-u">Upcoming Orders</h3>
 
@@ -37,29 +37,19 @@
                 <div class="order-card">
 
                     {% if order.order_type.value == "delivery" %}
-                        <img
-                            src="{{ url_for('static', filename='images/martin-baron-gfunQ5nvh6Y-unsplash.jpg') }}"
-                            alt="Delivery van carrying produce"
-                            class="order-card-img"
-                        >
+                        <img src="{{ url_for('static', filename='images/martin-baron-gfunQ5nvh6Y-unsplash.jpg') }}"
+                            alt="Delivery van carrying produce" class="order-card-img">
                     {% elif order.order_type.value == "collection" %}
-                        <img
-                            src="{{ url_for('static', filename='images/sara-scarpa-AJFQGDaFP-s-unsplash.jpg') }}"
-                            alt="Basket of fresh produce for collection"
-                            class="order-card-img"
-                        >
+                        <img src="{{ url_for('static', filename='images/sara-scarpa-AJFQGDaFP-s-unsplash.jpg') }}"
+                            alt="Basket of fresh produce for collection" class="order-card-img">
                     {% endif %}
 
                     <span class="order-badge {{ order.order_type.value }}">
                         {{ order.order_type.value | capitalize }}
                     </span>
-                    <p>
-                        {{ order.items | length }} items:
-                        <ul class="order-items-list">
-                            {% for item in order.items %}
-                            <li>{{ item.product.name }} &times; {{ item.quantity }}</li>
-                            {% endfor %}
-                    </p>
+
+                    <p class="order-items-count">{{ order.items | length }} item{{ 's' if order.items | length != 1 }}</p>
+
                     <p class="order-date">
                         {% if order.dc_date %}
                             {{ order.dc_date.strftime('%d/%m/%Y') }}
@@ -67,12 +57,23 @@
                             Date pending
                         {% endif %}
                     </p>
+
                     <p class="order-status status-{{ order.status.value | lower }}">{{ order.status.value }}</p>
+
+                    <!-- Items revealed on hover -->
+                    <div class="card-details">
+                        <ul class="order-items-list">
+                            {% for item in order.items %}
+                            <li>{{ item.product.name }} &times; {{ item.quantity }}</li>
+                            {% endfor %}
+                        </ul>
+                        <p class="order-placed">Ordered: {{ order.order_date.strftime('%d/%m/%Y') if order.order_date else '—' }}</p>
+                    </div>
+
                     <form method="POST" action="{{ url_for('customer.cancel_order', order_id=order.order_id) }}">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                        <button type="submit" class="btn-cancel" id="myBtn" >Cancel</button>
+                        <button type="submit" class="btn-cancel">Cancel</button>
                     </form>
-
                 </div>
                 {% endfor %}
             </div>
@@ -84,7 +85,7 @@
             {% endif %}
         </section>
 
-        <!-- ── Previous Orders ── -->
+                <!-- ── Previous Orders ── -->
         <section class="orders-section">
             <h3 class="section-title-p">Previous Orders</h3>
 
@@ -94,23 +95,19 @@
                 <div class="order-card past">
 
                     {% if order.order_type.value == "delivery" %}
-                        <img
-                            src="{{ url_for('static', filename='images/martin-baron-gfunQ5nvh6Y-unsplash.jpg') }}"
-                            alt="Delivery van carrying produce"
-                            class="order-card-img"
-                        >
+                        <img src="{{ url_for('static', filename='images/martin-baron-gfunQ5nvh6Y-unsplash.jpg') }}"
+                            alt="Delivery van carrying produce" class="order-card-img">
                     {% elif order.order_type.value == "collection" %}
-                        <img
-                            src="{{ url_for('static', filename='images/sara-scarpa-AJFQGDaFP-s-unsplash.jpg') }}"
-                            alt="Basket of fresh produce for collection"
-                            class="order-card-img"
-                        >
+                        <img src="{{ url_for('static', filename='images/sara-scarpa-AJFQGDaFP-s-unsplash.jpg') }}"
+                            alt="Basket of fresh produce for collection" class="order-card-img">
                     {% endif %}
 
                     <span class="order-badge {{ order.order_type.value }}">
                         {{ order.order_type.value | capitalize }}
                     </span>
+
                     <p class="order-items-count">{{ order.items | length }} item{{ 's' if order.items | length != 1 }}</p>
+
                     <p class="order-date">
                         {% if order.dc_date %}
                             {{ order.dc_date.strftime('%d/%m/%Y') }}
@@ -118,7 +115,18 @@
                             —
                         {% endif %}
                     </p>
+
                     <p class="order-status status-{{ order.status.value | lower }}">{{ order.status.value }}</p>
+
+                    <!-- Items revealed on hover -->
+                    <div class="card-details">
+                        <ul class="order-items-list">
+                            {% for item in order.items %}
+                            <li>{{ item.product.name }} &times; {{ item.quantity }}</li>
+                            {% endfor %}
+                        </ul>
+                        <p class="order-placed">Ordered: {{ order.order_date.strftime('%d/%m/%Y') if order.order_date else '—' }}</p>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
@@ -126,9 +134,9 @@
             <div class="empty-state">
                 <p>No previous orders to show.</p>
             </div>
-            {% endif %}
+            {% endif %}'
             <script src="{{ url_for('static', filename='js/customer/customer_dashboard.js') }}"></script>
         </section>
     </div>
-</div>
+</div>           
 {% endblock %}
