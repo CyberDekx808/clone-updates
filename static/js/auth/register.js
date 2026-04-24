@@ -1,3 +1,6 @@
+//auth/register.js
+// used to aid secure password creation in real time
+
 document.addEventListener('DOMContentLoaded', () => {
 const form = document.getElementById('register-form');
 const passwordInput = document.getElementById('password');

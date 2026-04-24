@@ -53,7 +53,13 @@
                     <span class="order-badge {{ order.order_type.value }}">
                         {{ order.order_type.value | capitalize }}
                     </span>
-                    <p class="order-items-count">{{ order.items | length }} item{{ 's' if order.items | length != 1 }}</p>
+                    <p>
+                        {{ order.items | length }} items:
+                        <ul class="order-items-list">
+                            {% for item in order.items %}
+                            <li>{{ item.product.name }} &times; {{ item.quantity }}</li>
+                            {% endfor %}
+                    </p>
                     <p class="order-date">
                         {% if order.dc_date %}
                             {{ order.dc_date.strftime('%d/%m/%Y') }}
@@ -64,8 +70,9 @@
                     <p class="order-status status-{{ order.status.value | lower }}">{{ order.status.value }}</p>
                     <form method="POST" action="{{ url_for('customer.cancel_order', order_id=order.order_id) }}">
                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                        <button type="submit" class="btn-cancel" onclick="return confirm('Cancel this order?')">Cancel</button>
+                        <button type="submit" class="btn-cancel" id="myBtn" >Cancel</button>
                     </form>
+
                 </div>
                 {% endfor %}
             </div>
@@ -120,6 +127,7 @@
                 <p>No previous orders to show.</p>
             </div>
             {% endif %}
+            <script src="{{ url_for('static', filename='js/customer/customer_dashboard.js') }}"></script>
         </section>
     </div>
 </div>

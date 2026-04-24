@@ -1,3 +1,7 @@
+//customer/checkout.js
+
+
+
 // Toggle delivery address field
 document.querySelectorAll('input[name="order_type"]').forEach(function(radio) {
     radio.addEventListener('change', function() {
@@ -13,6 +17,7 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
     var cvc = document.getElementById('cvc').value;
     var errors = [];
 
+    // validation for simulated payment details
     if (card.length < 13 || card.length > 19 || !/^\d+$/.test(card)) {
         errors.push('Please enter a valid card number.');
     }

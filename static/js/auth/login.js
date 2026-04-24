@@ -1,3 +1,5 @@
+//auth/login.js
+//ensures show password toggle is working
 const toggle = document.getElementById("togglePass");
 const passwordField = document.getElementById("password");
 
